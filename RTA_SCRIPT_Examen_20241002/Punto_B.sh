@@ -37,6 +37,9 @@ n
 n
 
 +1G
+n
+
+
 w
 EOF
 echo
@@ -45,27 +48,31 @@ sudo fdisk -l /dev/sdc
 echo 
 echo "Formateo las particiones: "
 
-for i in {4..13};
+for i in {5..14};
 do	
 	sudo mkfs.ext4 /dev/sdc$i
 done
 echo
 echo "Monto las particiones: "
-for i in {4..13};
+for i in {5..13};
 do
-    num_particiones=$i
     for j in {1..3};
     do
         num_alu=$j
         for x in {1..3};
         do
-        /dev/sdb$num_particion /Examenes-UTN/alumno_$num_alu/parcial$x ext4 defaults 0 0 | sudo tee -a /etc/fstab
+        echo "/dev/sdc$i ~/Examenes-UTN/alumno_$num_alu/parcial_$x ext4 defaults 0 0" | sudo tee -a /etc/fstab
 
-        sudo mount /dev/sdb$num_particion /Examenes-UTN/alumno_$num_alu/parcial$x
+        sudo mount /dev/sdc$i ~/Examenes-UTN/alumno_$num_alu/parcial_$x
         done
     done
 done
+
+echo"/dev/sdc14 ~/Examenes-UTN/profesores ext4 defaults 0 0" | sudo tee -a /etc/fstab
+
+sudo mount /dev/sdc14 ~/Examenes-UTN/profesores
+
 echo 
 echo "Valido montaje: "
-df -h | grep /Examenes-UTN
+df -h | grep ~/Examenes-UTN
 
