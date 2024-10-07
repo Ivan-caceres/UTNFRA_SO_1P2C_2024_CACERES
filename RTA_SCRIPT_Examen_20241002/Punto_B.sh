@@ -68,7 +68,7 @@ do
     done
 done
 
-echo"/dev/sdc14 ~/Examenes-UTN/profesores ext4 defaults 0 0" | sudo tee -a /etc/fstab
+echo "/dev/sdc14 ~/Examenes-UTN/profesores ext4 defaults 0 0" | sudo tee -a /etc/fstab
 
 sudo mount /dev/sdc14 ~/Examenes-UTN/profesores
 
